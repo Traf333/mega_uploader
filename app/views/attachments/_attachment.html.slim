@@ -1,9 +1,10 @@
-.row
+= div_for attachment, class: 'row'
   .col-md-4
     = attachment.title
   .col-md-4
-    = attachment.created_at.strftime('%d-%m-%Y')
-  /.col-md-2
-    = attachment.item_content_type
+    = attachment.tag_list
   .col-md-2
     = number_to_human_size attachment.item_file_size
+  .col-md-2.edit_link
+    = link_to [:edit, @user, attachment], class: 'btn btn-default btn-sm', title: 'Редактировать', remote: true
+      i.fa.fa-edit

@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @attachments = @user.attachments
+    @attachments = @user.attachments.includes(:tags)
   end
 
   # GET /users/new

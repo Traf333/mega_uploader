@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141008035631) do
+ActiveRecord::Schema.define(version: 20141008113649) do
 
   create_table "attachments", force: true do |t|
     t.string   "title"
@@ -25,6 +25,22 @@ ActiveRecord::Schema.define(version: 20141008035631) do
   end
 
   add_index "attachments", ["user_id"], name: "index_attachments_on_user_id"
+
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "attachment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "taggings", ["attachment_id", "tag_id"], name: "index_taggings_on_attachment_id_and_tag_id", unique: true
+  add_index "taggings", ["tag_id", "attachment_id"], name: "index_taggings_on_tag_id_and_attachment_id", unique: true
+
+  create_table "tags", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"

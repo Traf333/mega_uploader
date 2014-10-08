@@ -1,9 +1,9 @@
-= simple_form_for(@attachment) do |f|
-  = f.error_notification
 
-  .form-inputs
-    = f.input :title
-    = f.association :user
-
-  .form-actions
-    = f.button :submit
+= form_for [@user, @attachment], remote: true do |f|
+  .col-md-4
+    = f.text_field :title, placeholder: 'Название файла', class: 'form-control'
+  .col-md-4
+    = f.text_area :tag_list, placeholder: 'Введите тэги через запятую', class: 'form-control'
+  .col-md-2
+  .col-md-2.edit_link
+    = f.submit 'ОК', class: 'btn btn-success btn-sm', disable_with: 'bzz..'

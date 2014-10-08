@@ -37,6 +37,7 @@ class AttachmentsController < ApplicationController
       if @attachment.update(attachment_params)
         format.html { redirect_to @user, notice: 'Attachment was successfully updated.' }
         format.json { render :show, status: :ok, location: @attachment }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @attachment.errors, status: :unprocessable_entity }
@@ -64,6 +65,6 @@ class AttachmentsController < ApplicationController
   end
 
   def attachment_params
-    params.require(:attachment).permit(:title, :item)
+    params.require(:attachment).permit(:title, :item, :tag_list)
   end
 end
