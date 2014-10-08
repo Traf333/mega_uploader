@@ -1,0 +1,5 @@
+<% if @attachment.new_record? %>
+    alert("Что-то пошло не так: <%= j @attachment.errors.full_messages.join(', ').html_safe %>");
+<% else %>
+    $('#attachments').append("<%= j render @attachment %>");
+<% end %>

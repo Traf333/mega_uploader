@@ -27,17 +27,7 @@ class AttachmentsController < ApplicationController
   # POST /attachments
   # POST /attachments.json
   def create
-    @attachment = @user.attachments.build(attachment_params)
-
-    respond_to do |format|
-      if @attachment.save
-        format.html { redirect_to @user, notice: 'Attachment was successfully created.' }
-        format.json { render :show, status: :created, location: @attachment }
-      else
-        format.html { render :new }
-        format.json { render json: @attachment.errors, status: :unprocessable_entity }
-      end
-    end
+    @attachment = @user.attachments.create(attachment_params)
   end
 
   # PATCH/PUT /attachments/1

@@ -1,26 +1,28 @@
-- model_class = User
 #user
-  div class="page-header"
-    h1=t '.title', :default => model_class.model_name.human.titleize
+  h1= @user.name
 
-  p
-    strong= model_class.human_attribute_name(:name) + ':'
-    br
-    = @user.name
+  legend
+    strong Загрузка файлов
+    = form_for [@user, Attachment.new], html: {class: 'inline'} do |f|
+      span.btn.btn-info onclick="$(this).next().click();"
+        i.fa.fa-download>
+        | Загрузить много файлов
+      = f.file_field :item, multiple: true, id: 'upload_files', name: 'attachment[item]', style: 'display: none;'
+      /= f.submit 'Загрузить', class: 'btn btn-primary'
+  .row
+    .col-md-12
+      #uploading
 
-  hr
-  h2 Загрузка файлов
-
-  = form_for [@user, Attachment.new], id: 'upload_form' do |f|
-    = f.label :item, 'Upload files'
-    = f.file_field :item, multiple: true, id: 'upload_files', name: 'attachment[item]'
-    = f.submit 'Загрузить', class: 'btn btn-primary'
-    #notify
-      span
-      span
-
-#attachments
-  = render partial: 'attachments/attachment', collection: @attachments
+  #attachments
+    legend
+      strong Мои файлы
+    .row.header
+      .col-md-4 Название
+      .col-md-4 Дата загрузки
+      /.col-md-2 Тип файла
+      .col-md-2 Размер файла
+    = render partial: 'attachments/attachment', collection: @attachments
+= render 'shared/progressbar'
 
 /= link_to t('.back', :default => t("helpers.links.back")), users_path, :class => 'btn btn-default'
 /'
